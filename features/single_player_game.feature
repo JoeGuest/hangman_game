@@ -4,7 +4,6 @@ Feature: Single player game
     Given a new player
     When player starts a new game
     Then new game is generated
-    And player is asked to guess
 
   Scenario: player makes a guess 
     Given an incomplete word
