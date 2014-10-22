@@ -16,7 +16,7 @@ end
 Given(/^an incomplete word$/) do
   @player = Player.new
   @answer = Answer.new("Help")
-  Game.new(@player, @answer)
+  @game = Game.new(@player, @answer)
 end
 
 When(/^player makes a correct guess$/) do
@@ -28,15 +28,15 @@ Then(/^fill in blank\(s\) with letter$/) do
 end
 
 When(/^player makes an incorrect guess$/) do
-  pending # express the regexp above with the code you wish you had
+  @player.make_guess "s"
 end
 
 Then(/^player loses life$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(@player.lives).to eq 9
 end
 
 Then(/^letter is moved to trash$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(@game.wrong_guesses.map(&:letter)).to include "s"
 end
 
 Then(/^draw hangman$/) do
