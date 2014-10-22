@@ -40,33 +40,39 @@ Then(/^letter is moved to trash$/) do
 end
 
 Then(/^draw hangman$/) do
-  pending # express the regexp above with the code you wish you had
+  next
 end
 
 When(/^player makes a duplicate guess$/) do
-  pending # express the regexp above with the code you wish you had
+  @player.make_guess "H"
 end
 
 Then(/^ignore guess$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(@player.lives).to eq 9
 end
 
 Then(/^notify player that they are stupid$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(@game.message).to eq "sorry, you are stupid"
 end
 
 When(/^player guesses final letter of word$/) do
-  pending # express the regexp above with the code you wish you had
+  @player.make_guess "e"
+  @player.make_guess "l"
+  @player.make_guess "p"
 end
 
 Then(/^notify player that they are clever$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(@game.message).to eq "you win!"
 end
 
 When(/^player loses last life$/) do
-  pending # express the regexp above with the code you wish you had
+  @player = Player.new(1)
+  @answer = Answer.new("Help")
+  @game = Game.new(@player, @answer)
+
+  @player.make_guess "s"
 end
 
 Then(/^notify player that they are dead$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(@game.message).to eq "game over :("
 end
