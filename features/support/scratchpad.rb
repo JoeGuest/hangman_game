@@ -83,12 +83,16 @@ class Answer
               :guesses,
               :wrong_guesses
 
-  def initialize(word)
+  def initialize(word = nil)
     # generate answer from dictionary
-    @word = word || "Test"
+    @word = word || generate_new_word
     @current_answer = all_blanks
     @guesses = []
     @wrong_guesses = []
+  end
+
+  def generate_new_word
+    File.readlines("./words/words.txt").sample.strip
   end
 
   def guess!(guess)

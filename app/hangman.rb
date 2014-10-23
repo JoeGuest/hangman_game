@@ -11,7 +11,7 @@ get "/hangman" do
 
   unless settings.respond_to?(:game)
     player = Player.new
-    answer = Answer.new("Avengers")
+    answer = Answer.new
     game = Game.new(player, answer)
     Sinatra::Application.set :game, game
   end
