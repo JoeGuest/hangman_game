@@ -20,16 +20,27 @@ require "capybara/poltergeist"
 
 require "./app/hangman.rb"
 require "./features/support/scratchpad.rb"
+require "support/game_helper.rb"
 
-player = Player.new
-answer = Answer.new("Avengers")
-game = Game.new(player, answer)
-Sinatra::Application.set :game, game
+def reset_game
+  player = Player.new
+  answer = Answer.new("Avengers")
+  game = Game.new(player, answer)
+  Sinatra::Application.set :game, game
+end
+
+reset_game
 
 Capybara.app = Sinatra::Application
 Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
+  config.include GameHelper, type: :feature
+
+  config.before(type: :feature) do
+    reset_game
+  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

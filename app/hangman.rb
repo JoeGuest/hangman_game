@@ -5,7 +5,7 @@ get "/" do
 end
 
 get "/hangman" do
-  erb :game, locals: { answer: settings.game.answer.current_answer_as_string }
+  erb :game, locals: { game: settings.game }
 end
 
 post "/hangman" do
@@ -13,5 +13,5 @@ post "/hangman" do
 
   settings.game.player.make_guess(guess)
 
-  erb :game, locals: { answer: settings.game.answer.current_answer_as_string }
+  erb :game, locals: { game: settings.game }
 end

@@ -118,10 +118,6 @@ class Answer
     word == current_answer.join
   end
 
-  def current_answer_as_string
-    current_answer.join(" ")
-  end
-
   private
 
   def all_blanks

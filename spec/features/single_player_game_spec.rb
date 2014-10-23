@@ -14,22 +14,23 @@ feature "single player game" do
   scenario "player makes multiple correct guesses" do
     visit "/hangman"
 
-    fill_in "guess", with: "A"
-    click_button "Guess!"  
+    make_guess "A"  
 
-    within("#answer") do
-      expect(page).to have_content "A _ _ _ _ _ _ _"
-    end
+    expect_answer_to_be "A _ _ _ _ _ _ _"
 
-    fill_in "guess", with: "v"
-    click_button "Guess!"
-
-    within("#answer") do
-      expect(page).to have_content "A v _ _ _ _ _ _"
-    end
+    make_guess "v"
+    
+    expect_answer_to_be "A v _ _ _ _ _ _"
   end
 
-  scenario "player makes an incorrect guess"
+  scenario "player makes an incorrect guess" do
+    visit "/hangman"
+
+    make_guess "t"
+
+    expect_answer_to_be "_ _ _ _ _ _ _ _"
+    expect_trash_to_contain "t"
+  end
 
   scenario "player makes a duplicate guess"
 
