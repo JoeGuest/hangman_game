@@ -15,4 +15,10 @@ module GameHelper
       expect(page).to have_content letter
     end
   end
+
+  def expect_lives_to_be(lives)
+    within("#lives") do
+      expect(page).to have_content lives
+    end
+  end
 end

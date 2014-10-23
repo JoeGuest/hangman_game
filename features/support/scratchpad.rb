@@ -42,13 +42,13 @@ class Game
       # draw hangman
 
       if @player.dead?
-        @message = "game over :("
+        @message = "Game over :("
       else
         @message = "wrong!"
       end
 
     when :duplicate
-      @message = "sorry, you are stupid"
+      @message = "Have we met before?"
     end
 
     check_complete_answer
@@ -56,7 +56,7 @@ class Game
 
   def check_complete_answer
     if @answer.completed?
-      @message = "you win!"
+      @message = "You win!"
     end
   end
 
