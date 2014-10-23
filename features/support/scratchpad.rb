@@ -21,7 +21,7 @@ class Player
 end
 
 class Game
-  attr_reader :message
+  attr_reader :player, :answer, :message
 
   def initialize(player, answer)
     @player = player
@@ -116,6 +116,10 @@ class Answer
 
   def completed?
     word == current_answer.join
+  end
+
+  def current_answer_as_string
+    current_answer.join(" ")
   end
 
   private

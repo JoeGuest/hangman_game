@@ -21,6 +21,11 @@ require "capybara/poltergeist"
 require "./app/hangman.rb"
 require "./features/support/scratchpad.rb"
 
+player = Player.new
+answer = Answer.new("Avengers")
+game = Game.new(player, answer)
+Sinatra::Application.set :game, game
+
 Capybara.app = Sinatra::Application
 Capybara.javascript_driver = :poltergeist
 

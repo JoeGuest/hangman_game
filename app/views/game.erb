@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Hangman!</title>
+  </head>
+  <body>
+    <div id="content">
+      <div id="content-left">
+        <div id="lives"></div>
+        <div id="answer"><%= answer %></div>
+        <div id="hangman"></div>
+        <div id="trash"></div>
+      </div>
+
+      <div id="content-right">
+        <form action="" method="POST">
+          <input type="text" name="guess" id="guess" />
+          <input type="submit" value="Guess!" />
+        </form>        
+      </div>
+    </div>
+  </body>
+</html>
