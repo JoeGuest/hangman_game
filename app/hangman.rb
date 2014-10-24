@@ -3,6 +3,22 @@ require "sinatra/reloader"
 
 require "./features/support/scratchpad.rb"
 
+helpers do
+  def render_answer(answer)
+    current_answer = answer.inject("") do |str, guess|
+      if guess == "_"
+        str << guess
+      elsif guess.auto_generated?
+        str << "<span class='auto-generated'>#{guess.letter}</span>"
+      else
+        str << guess.letter
+      end
+    end
+
+    current_answer.split("").join(" ")
+  end
+end
+
 get "/" do
   erb :splash
 end

@@ -33,8 +33,8 @@ Feature: Single player game
 
     When player loses last life
     Then notify player that they are dead
+    And show answer
 
   Scenario: game is over
     Given a finished game
-    When player makes a guess
-    Then prevent further guesses
+    Then prevent further guesses        

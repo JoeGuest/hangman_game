@@ -31,8 +31,6 @@ class Game
   end
 
   def check_guess(guess)
-    return if game_over?
-
     case @answer.guess!(guess)
     when :correct
       @answer.current_answer
@@ -55,16 +53,18 @@ class Game
       @message = "Feeling special? You can only use a-z"
     end
 
-    check_complete_answer
+    check_complete_game
   end
 
-  def check_complete_answer
-    if @answer.completed?
+  def check_complete_game
+    if @player.dead?
+      @answer.complete!
+    elsif @answer.completed?
       @message = "You win!"
     end
   end
 
-  def game_over?
+  def completed?
     @player.dead? || @answer.completed?
   end
 
@@ -76,12 +76,21 @@ end
 class Guess
   attr_reader :letter
 
-  def initialize(letter)
+  def initialize(letter, type = nil)
     @letter = letter
+    @type = type
+  end
+
+  def to_s
+    letter
   end
 
   def ==(other)
-    letter == other.letter
+    to_s == other.to_s
+  end
+
+  def auto_generated?
+    @type == :auto_generated
   end
 end
 
@@ -113,9 +122,9 @@ class Answer
       @guesses << guess
 
       # return true if correct, else false
-      word.split("").each_with_index do |letter, index|
+      letters.each_with_index do |letter, index|
         if guess.letter == letter
-          @current_answer[index] = letter
+          @current_answer[index] = guess
           result = :correct
         end
       end
@@ -128,6 +137,14 @@ class Answer
     result
   end
 
+  def complete!
+    letters.each_with_index do |letter, index|
+      if @current_answer[index] == '_'
+        @current_answer[index] = Guess.new(letter, :auto_generated)
+      end
+    end
+  end
+
   def completed?
     word == current_answer.join
   end
@@ -137,4 +154,12 @@ class Answer
   def all_blanks
     ["_"] * word.length
   end
+
+  def letters_guessed_by_player
+    @guesses.map(&:letter)
+  end
+
+  def letters
+    @word.split("")
+  end 
 end

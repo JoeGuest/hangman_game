@@ -6,7 +6,7 @@
     <div id="content">
       <div id="content-left">
         <div id="lives"><%= game.player.lives %></div>
-        <div id="answer"><%= game.answer.current_answer.join(" ") %></div>
+        <div id="answer"><%= render_answer(game.answer.current_answer) %></div>
         <div id="hangman"></div>
         <div id="trash"><%= game.wrong_guesses.map(&:letter).join(" ") %></div>
         <a href="/hangman/new" id="new-game">new game</a>
@@ -15,9 +15,11 @@
       <div id="content-right">
         <form action="" method="POST">
           <div id="message"><%= game.message %></div>
-          <input type="text" name="guess" id="guess" autofocus/>
-          <input type="submit" value="Guess!" />
-        </form>        
+          <% unless game.completed? %>
+            <input type="text" name="guess" id="guess" autofocus/>
+            <input type="submit" value="Guess!" />
+          <% end %>
+        </form> 
       </div>
     </div>
   </body>
