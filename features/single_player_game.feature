@@ -35,6 +35,13 @@ Feature: Single player game
     When player guesses final letter of word
     Then notify player that they are clever
 
+    When player guesses whole word correctly
+    Then notify player that they are clever
+
+    When player guesses whole word incorrectly
+    Then player loses life
+    And notify player that they are wrong
+
     When player loses last life
     Then notify player that they are dead
     And show answer

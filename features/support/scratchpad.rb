@@ -127,11 +127,21 @@ class Answer
     else
       @guesses << guess
 
-      # return true if correct, else false
-      letters.each_with_index do |letter, index|
-        if guess.letter == letter
-          @current_answer[index] = guess
-          result = :correct
+      if word_length == @word.length
+        if guess.letter == @word
+          letters.each_with_index do |letter, index|
+            @current_answer[index] = Guess.new(letter)
+          end
+        else
+          result = :incorrect
+        end
+      else
+        # return true if correct, else false
+        letters.each_with_index do |letter, index|
+          if guess.letter == letter
+            @current_answer[index] = guess
+            result = :correct
+          end
         end
       end
 

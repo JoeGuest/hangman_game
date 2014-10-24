@@ -91,6 +91,26 @@ Then(/^notify player that they are clever$/) do
   expect_message_to_be "You win!"
 end
 
+When(/^player guesses whole word correctly$/) do
+  reset_test_game
+  
+  visit "/hangman"
+
+  make_guess "Avengers"
+end
+
+When(/^player guesses whole word incorrectly$/) do
+  reset_test_game
+
+  visit "/hangman"
+
+  make_guess "Avengert"
+end
+
+Then(/^notify player that they are wrong$/) do
+  expect_message_to_be "wrong!"
+end
+
 When(/^player loses last life$/) do  
   reset_test_game
 
