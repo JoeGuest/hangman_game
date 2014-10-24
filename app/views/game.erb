@@ -1,15 +1,21 @@
 <html>
   <head>
     <title>Hangman!</title>
+    <link href="/styles/app.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+  <!-- <img src="/images/background.jpg" /> -->
+
     <div id="content">
+      <div id="content-top">
+        <div id="answer"><%= render_answer(game.answer.current_answer) %></div>
+        <a href="/hangman/new" id="new-game">new game</a>
+      </div>
+
       <div id="content-left">
         <div id="lives"><%= game.player.lives %></div>
-        <div id="answer"><%= render_answer(game.answer.current_answer) %></div>
         <div id="hangman"></div>
         <div id="trash"><%= game.wrong_guesses.map(&:letter).join(" ") %></div>
-        <a href="/hangman/new" id="new-game">new game</a>
       </div>
 
       <div id="content-right">
@@ -17,7 +23,6 @@
           <div id="message"><%= game.message %></div>
           <% unless game.completed? %>
             <input type="text" name="guess" id="guess" autofocus/>
-            <input type="submit" value="Guess!" />
           <% end %>
         </form> 
       </div>

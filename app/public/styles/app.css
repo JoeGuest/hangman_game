@@ -1,0 +1,98 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background: #000;
+  background: url("/images/background.jpg") center;
+}
+
+img {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  overflow: hidden;
+}
+
+#content {
+  position: relative;
+  width: 70%;
+  height: 80%;
+  background: #fff;
+  opacity: 0.7;
+  margin: 60px auto;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* CONTENT TOP */
+#content-top {
+  padding: 0 10px;
+  position: relative;
+  height: 30%;
+}
+
+#answer {
+  text-align: center;
+  font-size: 120px;
+}
+
+#new-game {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: orange;
+  color: white;
+  padding: 6px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+/* CONTENT LEFT */
+#content-left {
+  width: 50%;
+  float: left;
+  height: 70%;
+  position: relative;
+}
+
+#trash {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  text-decoration: line-through;
+  font-size: 25px;
+}
+
+#lives {
+  font-size: 25px;
+  color: red;
+}
+
+/* CONTENT RIGHT */
+#content-right {
+  width: 50%;
+  height: 70%;
+  float: left;
+}
+
+#content-right form {
+  text-align: center;
+  padding-top: 100px;
+}
+
+#guess {
+  font-size: 60px;
+  width: 80%;
+  margin: 20px 0;
+  text-align: center;
+}
+
+#message {
+  font-size: 35px;
+  color: red;
+}
+
