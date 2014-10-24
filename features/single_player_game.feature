@@ -5,6 +5,10 @@ Feature: Single player game
     When player starts a new game
     Then new game is generated
 
+    Given an existing game
+    When player requests new game
+    Then new game is generated
+
   Scenario: player makes a guess 
     Given an incomplete word
 

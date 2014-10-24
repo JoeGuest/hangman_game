@@ -1,16 +1,23 @@
-require "./features/support/scratchpad.rb"
-
 Given(/^a new player$/) do
   @player = Player.new
 end
 
 When(/^player starts a new game$/) do
-  @answer = Answer.new("Help")
-  @game = Game.new(@player, @answer)  
+  visit "/hangman"  
 end
 
 Then(/^new game is generated$/) do
-  expect(@player.current_game).to be_a Game
+  expect(page).to have_css "#answer"
+  expect(page).to have_content "_ _ _ _ _ _ _ _"
+end
+
+Given(/^an existing game$/) do
+  visit "/hangman"
+  make_guess "A"
+end
+
+When(/^player requests new game$/) do
+  click_link "new game"
 end
 
 Given(/^an incomplete word$/) do
@@ -52,7 +59,7 @@ Then(/^ignore guess$/) do
 end
 
 Then(/^notify player that they are stupid$/) do
-  expect(@game.message).to eq "sorry, you are stupid"
+  expect(@game.message).to eq "Have we met before?"
 end
 
 When(/^player guesses final letter of word$/) do
@@ -62,7 +69,7 @@ When(/^player guesses final letter of word$/) do
 end
 
 Then(/^notify player that they are clever$/) do
-  expect(@game.message).to eq "you win!"
+  expect(@game.message).to eq "You win!"
 end
 
 When(/^player loses last life$/) do
@@ -74,5 +81,7 @@ When(/^player loses last life$/) do
 end
 
 Then(/^notify player that they are dead$/) do
-  expect(@game.message).to eq "game over :("
+  expect(@game.message).to eq "Game over :("
 end
+
+World(GameHelper)

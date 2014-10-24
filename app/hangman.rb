@@ -8,7 +8,6 @@ get "/" do
 end
 
 get "/hangman" do
-
   unless settings.respond_to?(:game)
     player = Player.new
     answer = Answer.new
