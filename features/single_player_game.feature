@@ -24,6 +24,10 @@ Feature: Single player game
     Then ignore guess
     And notify player that they are stupid
 
+    When player guesses an invalid character
+    Then ignore guess
+    And notify player that they are rebellious
+
     When player guesses final letter of word
     Then notify player that they are clever
 

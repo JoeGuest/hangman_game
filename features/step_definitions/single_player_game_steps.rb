@@ -51,16 +51,26 @@ Then(/^draw hangman$/) do
 end
 
 When(/^player makes a duplicate guess$/) do
+  reset_test_game
   make_guess "A"
   make_guess "A"
 end
 
 Then(/^ignore guess$/) do
-  expect_lives_to_be 9
+  expect_lives_to_be 10
 end
 
 Then(/^notify player that they are stupid$/) do
   expect_message_to_be "Have we met before?"
+end
+
+When(/^player guesses an invalid character$/) do
+  reset_test_game
+  make_guess "1"
+end
+
+Then(/^notify player that they are rebellious$/) do
+  expect_message_to_be "Feeling special? You can only use a-z"
 end
 
 When(/^player guesses final letter of word$/) do
@@ -75,7 +85,7 @@ end
 
 When(/^player loses last life$/) do  
   reset_test_game
-  
+
   letters = ("a".."z").to_a - %w(A v e n g e r s)
 
   letters.first(10).each do |letter|

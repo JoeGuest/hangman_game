@@ -49,6 +49,8 @@ class Game
 
     when :duplicate
       @message = "Have we met before?"
+    when :invalid
+      @message = "Feeling special? You can only use a-z"
     end
 
     check_complete_answer
@@ -99,6 +101,8 @@ class Answer
     result = :incorrect
     if @guesses.include? guess
       result = :duplicate
+    elsif guess.letter.match /[^a-z]/i
+      result = :invalid
     else
       @guesses << guess
 
