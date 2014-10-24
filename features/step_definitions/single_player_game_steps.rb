@@ -97,4 +97,25 @@ Then(/^notify player that they are dead$/) do
   expect_message_to_be "Game over :("
 end
 
+Given(/^a finished game$/) do
+  reset_test_game
+
+  visit "/hangman"
+
+  letters = ("a".."z").to_a - %w(A v e n g e r s)
+
+  letters.first(10).each do |letter|
+    make_guess letter
+  end  
+end
+
+When(/^player makes a guess$/) do
+  make_guess "A"
+end
+
+Then(/^prevent further guesses$/) do
+  expect_lives_to_be 0
+  expect_answer_to_be "_ _ _ _ _ _ _ _"
+end
+
 World(GameHelper)

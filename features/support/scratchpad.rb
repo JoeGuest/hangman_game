@@ -31,6 +31,8 @@ class Game
   end
 
   def check_guess(guess)
+    return if game_over?
+
     case @answer.guess!(guess)
     when :correct
       @answer.current_answer
@@ -60,6 +62,10 @@ class Game
     if @answer.completed?
       @message = "You win!"
     end
+  end
+
+  def game_over?
+    @player.dead? || @answer.completed?
   end
 
   def wrong_guesses
