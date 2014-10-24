@@ -7,8 +7,9 @@ When(/^player starts a new game$/) do
 end
 
 Then(/^new game is generated$/) do
-  expect(page).to have_css "#answer"
-  expect(page).to have_content "_ _ _ _ _ _ _ _"
+  within("#answer") do
+    expect(page).to_not match /[a-z]/i
+  end
 end
 
 Given(/^an existing game$/) do

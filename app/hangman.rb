@@ -18,6 +18,15 @@ get "/hangman" do
   erb :game, locals: { game: settings.game }
 end
 
+get "/hangman/new" do
+  player = Player.new
+  answer = Answer.new
+  game = Game.new(player, answer)
+  Sinatra::Application.set :game, game 
+  
+  redirect "/hangman" 
+end
+
 post "/hangman" do
   guess = params[:guess]
 
