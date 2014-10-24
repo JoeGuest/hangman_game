@@ -6,9 +6,12 @@ require "sinatra"
 require "./app/hangman.rb"
 Sinatra::Application.set :root, "./app"
 
-player = Player.new
-answer = Answer.new("Avengers")
-game = Game.new(player, answer)
-Sinatra::Application.set :game, game
+def reset_test_game
+  player = Player.new
+  answer = Answer.new("Avengers")
+  game = Game.new(player, answer)
+  Sinatra::Application.set :game, game
+end
 
+reset_test_game
 Capybara.app = Sinatra::Application

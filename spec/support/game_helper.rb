@@ -21,4 +21,10 @@ module GameHelper
       expect(page).to have_content lives
     end
   end
+
+  def expect_message_to_be(message)
+    within("#message") do
+      expect(page).to have_content message
+    end
+  end
 end

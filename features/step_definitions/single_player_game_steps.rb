@@ -22,29 +22,28 @@ When(/^player requests new game$/) do
 end
 
 Given(/^an incomplete word$/) do
-  @player = Player.new
-  @answer = Answer.new("Help")
-  @game = Game.new(@player, @answer)
+  reset_test_game
+  visit "/hangman"
 end
 
 When(/^player makes a correct guess$/) do
-  @player.make_guess "H"
+  make_guess "A"
 end
 
 Then(/^fill in blank\(s\) with letter$/) do
-  expect(@answer.current_answer).to eq ["H", "_", "_", "_"]
+  expect_answer_to_be "A _ _ _ _ _ _ _"
 end
 
 When(/^player makes an incorrect guess$/) do
-  @player.make_guess "s"
+  make_guess "p"
 end
 
 Then(/^player loses life$/) do
-  expect(@player.lives).to eq 9
+  expect_lives_to_be 9
 end
 
 Then(/^letter is moved to trash$/) do
-  expect(@game.wrong_guesses.map(&:letter)).to include "s"
+  expect_trash_to_contain "p"
 end
 
 Then(/^draw hangman$/) do
@@ -52,37 +51,40 @@ Then(/^draw hangman$/) do
 end
 
 When(/^player makes a duplicate guess$/) do
-  @player.make_guess "H"
+  make_guess "A"
+  make_guess "A"
 end
 
 Then(/^ignore guess$/) do
-  expect(@player.lives).to eq 9
+  expect_lives_to_be 9
 end
 
 Then(/^notify player that they are stupid$/) do
-  expect(@game.message).to eq "Have we met before?"
+  expect_message_to_be "Have we met before?"
 end
 
 When(/^player guesses final letter of word$/) do
-  @player.make_guess "e"
-  @player.make_guess "l"
-  @player.make_guess "p"
+  %w(A v e n g e r s).each do |letter|
+    make_guess letter
+  end
 end
 
 Then(/^notify player that they are clever$/) do
-  expect(@game.message).to eq "You win!"
+  expect_message_to_be "You win!"
 end
 
-When(/^player loses last life$/) do
-  @player = Player.new(1)
-  @answer = Answer.new("Help")
-  @game = Game.new(@player, @answer)
+When(/^player loses last life$/) do  
+  reset_test_game
+  
+  letters = ("a".."z").to_a - %w(A v e n g e r s)
 
-  @player.make_guess "s"
+  letters.first(10).each do |letter|
+    make_guess letter
+  end
 end
 
 Then(/^notify player that they are dead$/) do
-  expect(@game.message).to eq "Game over :("
+  expect_message_to_be "Game over :("
 end
 
 World(GameHelper)
