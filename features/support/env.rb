@@ -1,6 +1,6 @@
 require "capybara/cucumber"
 require "./features/support/scratchpad.rb"
-require "./spec/support/game_helper.rb"
+require "./features/support/game_helper.rb"
 
 require "sinatra"
 require "./app/hangman.rb"
