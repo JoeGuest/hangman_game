@@ -51,6 +51,8 @@ class Game
       @message = "Have we met before?"
     when :invalid
       @message = "Feeling special? You can only use a-z"
+    when :too_many_letters
+      @message = "Don't be greedy! One letter..."
     end
 
     check_complete_game
@@ -114,10 +116,14 @@ class Answer
 
   def guess!(guess)
     result = :incorrect
+    word_length = guess.letter.length
+
     if @guesses.include? guess
       result = :duplicate
     elsif guess.letter.match /[^a-z]/i
       result = :invalid
+    elsif word_length > 1 && word_length != @word.length
+      result = :too_many_letters
     else
       @guesses << guess
 

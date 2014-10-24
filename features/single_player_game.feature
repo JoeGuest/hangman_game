@@ -28,6 +28,10 @@ Feature: Single player game
     Then ignore guess
     And notify player that they are rebellious
 
+    When player enters more than one character
+    Then ignore guess
+    And notify player that they are greedy
+
     When player guesses final letter of word
     Then notify player that they are clever
 

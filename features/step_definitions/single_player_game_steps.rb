@@ -73,6 +73,14 @@ Then(/^notify player that they are rebellious$/) do
   expect_message_to_be "Feeling special? You can only use a-z"
 end
 
+When(/^player enters more than one character$/) do
+  make_guess "abc"
+end
+
+Then(/^notify player that they are greedy$/) do
+  expect_message_to_be "Don't be greedy! One letter..."
+end
+
 When(/^player guesses final letter of word$/) do
   %w(A v e n g e r s).each do |letter|
     make_guess letter
