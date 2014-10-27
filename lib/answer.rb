@@ -12,10 +12,6 @@ class Answer
     @wrong_guesses = []
   end
 
-  def generate_new_word
-    File.readlines("./words/words.txt").sample.strip
-  end
-
   def guess!(guess)
     result = :incorrect
     word_length = guess.letter.length
@@ -68,6 +64,10 @@ class Answer
   end
 
   private
+
+  def generate_new_word
+    File.readlines("./words/words.txt").sample.strip
+  end
 
   def all_blanks
     ["_"] * word.length
