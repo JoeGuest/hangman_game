@@ -7,17 +7,17 @@ describe Game do
     @game = Game.new(@player, @answer)
   end
 
-  describe "#make_guess" do
+  describe "#new_guess" do
     it "makes guess" do
-      guess = @game.make_guess("g")
+      guess = @game.new_guess("g")
       expect(@game.guesses).to include guess
     end
   end
 
-  describe "#check_guess" do
+  describe "#handle_guess" do
     context "when correct" do
       it "displays message" do
-        @game.make_guess(@answer.word[0])
+        @game.new_guess(@answer.word[0])
         expect(@game.message).to eq "correct!"
       end
     end
@@ -25,7 +25,7 @@ describe Game do
     context "when incorrect" do
       it "causes player to lose life" do
         letter = (("a".."z").to_a - @answer.word.split("")).first
-        @game.make_guess letter
+        @game.new_guess letter
 
         expect(@player.lives).to eq 9
       end
@@ -38,7 +38,7 @@ describe Game do
         end
 
         it "displays message" do
-          @game.make_guess "t"
+          @game.new_guess "t"
 
           expect(@game.message).to eq "Game over :("
         end
@@ -46,22 +46,22 @@ describe Game do
 
       context "when player still alive" do
         it "displays message" do
-          @game.make_guess "t"
+          @game.new_guess "t"
         end
       end
     end
 
     context "when duplicate" do
       it "displays message" do
-        @game.make_guess(@answer.word[0])
-        @game.make_guess(@answer.word[0])
+        @game.new_guess(@answer.word[0])
+        @game.new_guess(@answer.word[0])
 
         expect(@game.message).to eq "Have we met before?"        
       end
     end
     context "when invalid" do
       it "displays message" do
-        @game.make_guess "1"
+        @game.new_guess "1"
 
         expect(@game.message).to eq "Feeling special? You can only use a-z"
       end
@@ -69,7 +69,7 @@ describe Game do
 
     context "when too many letters" do
       it "displays message" do
-        @game.make_guess("a" * (@answer.word.length + 1))
+        @game.new_guess("a" * (@answer.word.length + 1))
 
         expect(@game.message).to eq "Don't be greedy! One letter..."
       end
@@ -88,7 +88,7 @@ describe Game do
         expect(@answer).to receive(:completed?)
         expect(@answer).to receive(:complete!)
 
-        @game.make_guess "t"
+        @game.new_guess "t"
       end
     end
 
@@ -100,9 +100,9 @@ describe Game do
       end
 
       it "displays message" do
-        @game.make_guess "W"
-        @game.make_guess "i"
-        @game.make_guess "n"
+        @game.new_guess "W"
+        @game.new_guess "i"
+        @game.new_guess "n"
 
         expect(@game.message).to eq "You win!"
       end
@@ -129,7 +129,7 @@ describe Game do
 
   describe "#guesses" do
     it "returns guesses from Answer" do
-      @game.make_guess "t"
+      @game.new_guess "t"
 
       expect(@game.guesses).to be @answer.guesses
     end
@@ -137,7 +137,7 @@ describe Game do
 
   describe "#wrong_guesses" do
     it "returns wrong_guesses from Answer" do
-      @game.make_guess "t"
+      @game.new_guess "t"
 
       expect(@game.wrong_guesses).to be @answer.wrong_guesses
     end

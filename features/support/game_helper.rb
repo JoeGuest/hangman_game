@@ -1,5 +1,5 @@
 module GameHelper
-  def make_guess(guess)
+  def new_guess(guess)
     fill_in "guess", with: guess
     click_button "Guess!"
   end

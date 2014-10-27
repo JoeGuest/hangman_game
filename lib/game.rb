@@ -6,13 +6,13 @@ class Game
     @answer = answer
   end
 
-  def make_guess(guess)
+  def new_guess(guess)
     this_guess = Guess.new(guess)
-    check_guess(this_guess)
+    handle_guess(this_guess)
     this_guess
   end
 
-  def check_guess(guess)
+  def handle_guess(guess)
     result = @answer.guess!(guess)
 
     action_for_guess(result)

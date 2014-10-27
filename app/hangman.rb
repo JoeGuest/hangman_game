@@ -48,7 +48,7 @@ end
 post "/hangman" do
   guess = params[:guess]
 
-  settings.game.make_guess(guess)
+  settings.game.new_guess(guess)
 
   erb :game, locals: { game: settings.game }
 end

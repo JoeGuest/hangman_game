@@ -12,7 +12,7 @@ describe Player do
     expect(player.lives).to eq 5
   end
 
-  describe "#make_guess" do
+  describe "#new_guess" do
     it "creates a Guess object and sends to Game" do
 
     end

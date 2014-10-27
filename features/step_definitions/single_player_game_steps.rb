@@ -14,7 +14,7 @@ end
 
 Given(/^an existing game$/) do
   visit "/hangman"
-  make_guess "A"
+  new_guess "A"
 end
 
 When(/^player requests new game$/) do
@@ -27,7 +27,7 @@ Given(/^an incomplete word$/) do
 end
 
 When(/^player makes a correct guess$/) do
-  make_guess "A"
+  new_guess "A"
 end
 
 Then(/^fill in blank\(s\) with letter$/) do
@@ -35,7 +35,7 @@ Then(/^fill in blank\(s\) with letter$/) do
 end
 
 When(/^player makes an incorrect guess$/) do
-  make_guess "p"
+  new_guess "p"
 end
 
 Then(/^player loses life$/) do
@@ -52,8 +52,8 @@ end
 
 When(/^player makes a duplicate guess$/) do
   reset_test_game
-  make_guess "A"
-  make_guess "A"
+  new_guess "A"
+  new_guess "A"
 end
 
 Then(/^ignore guess$/) do
@@ -66,7 +66,7 @@ end
 
 When(/^player guesses an invalid character$/) do
   reset_test_game
-  make_guess "1"
+  new_guess "1"
 end
 
 Then(/^notify player that they are rebellious$/) do
@@ -74,7 +74,7 @@ Then(/^notify player that they are rebellious$/) do
 end
 
 When(/^player enters more than one character$/) do
-  make_guess "abc"
+  new_guess "abc"
 end
 
 Then(/^notify player that they are greedy$/) do
@@ -83,7 +83,7 @@ end
 
 When(/^player guesses final letter of word$/) do
   %w(A v e n g e r s).each do |letter|
-    make_guess letter
+    new_guess letter
   end
 end
 
@@ -96,7 +96,7 @@ When(/^player guesses whole word correctly$/) do
   
   visit "/hangman"
 
-  make_guess "Avengers"
+  new_guess "Avengers"
 end
 
 When(/^player guesses whole word incorrectly$/) do
@@ -104,7 +104,7 @@ When(/^player guesses whole word incorrectly$/) do
 
   visit "/hangman"
 
-  make_guess "Avengert"
+  new_guess "Avengert"
 end
 
 Then(/^notify player that they are wrong$/) do
@@ -119,7 +119,7 @@ When(/^player loses last life$/) do
   letters = ("a".."z").to_a - %w(A v e n g e r s)
 
   letters.first(10).each do |letter|
-    make_guess letter
+    new_guess letter
   end
 end
 
@@ -139,7 +139,7 @@ Given(/^a finished game$/) do
   letters = ("a".."z").to_a - %w(A v e n g e r s)
 
   letters.first(10).each do |letter|
-    make_guess letter
+    new_guess letter
   end  
 end
 
