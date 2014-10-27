@@ -8,10 +8,15 @@ class Game
     @answer = answer
   end
 
+  def make_guess(guess)
+    this_guess = Guess.new(guess)
+    check_guess(this_guess)
+    this_guess
+  end
+
   def check_guess(guess)
     case @answer.guess!(guess)
     when :correct
-      @answer.current_answer
       @message = "correct!"
     when :incorrect
       @player.lose_life!
@@ -45,7 +50,11 @@ class Game
   end
 
   def completed?
-    @player.dead? || @answer.completed?
+    (@player.dead? || @answer.completed?) || false
+  end
+
+  def guesses
+    @answer.guesses
   end
 
   def wrong_guesses
