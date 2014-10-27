@@ -41,7 +41,7 @@ class Game
     if @answer.completed?
       set_message(:complete)
     else
-      @answer.complete!
+      @answer.autocomplete!
     end
   end
 

@@ -3,13 +3,13 @@ require "spec_helper"
 describe Game do
   before do
     @player = Player.new
-    @answer = Answer.new
+    @answer = Answer.new("Hello")
     @game = Game.new(@player, @answer)
   end
 
   describe "#new_guess" do
     it "makes guess" do
-      guess = @game.new_guess("g")
+      guess = @game.new_guess("H")
       expect(@game.guesses).to include guess
     end
   end
@@ -86,7 +86,7 @@ describe Game do
 
       it "automatically completes Answer" do
         expect(@answer).to receive(:completed?)
-        expect(@answer).to receive(:complete!)
+        expect(@answer).to receive(:autocomplete!)
 
         @game.new_guess "t"
       end

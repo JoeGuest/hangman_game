@@ -48,10 +48,10 @@ describe Answer do
     end
   end
 
-  describe "#complete!" do
+  describe "#autocomplete!" do
     it "completes incomplete word" do
       answer = Answer.new
-      answer.complete!
+      answer.autocomplete!
 
       expect(answer.word == answer.current_answer.join).to eq true
     end
@@ -60,7 +60,7 @@ describe Answer do
   describe "#complete?" do
     it "returns true if word complete" do
       answer = Answer.new
-      answer.complete!
+      answer.autocomplete!
 
       expect(answer.completed?).to eq true
     end
