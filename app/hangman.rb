@@ -1,7 +1,7 @@
 require "sinatra"
 require "sinatra/reloader"
 
-require "./features/support/scratchpad.rb"
+require "./lib/hangman"
 
 set :erb, escape_html: false
 

@@ -1,9 +1,10 @@
 require "capybara/cucumber"
-require "./features/support/scratchpad.rb"
-require "./features/support/game_helper.rb"
+require "./features/support/game_helper"
+
+require "./lib/hangman"
 
 require "sinatra"
-require "./app/hangman.rb"
+require "./app/hangman"
 Sinatra::Application.set :root, "./app"
 
 def reset_test_game
