@@ -23,6 +23,7 @@
           <div id="message"><%= game.message %></div>
           <% unless game.completed? %>
             <input type="text" name="guess" id="guess" autofocus/>
+            <input type="submit" value="Guess!" />
           <% end %>
         </form> 
       </div>
