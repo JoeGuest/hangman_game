@@ -2,9 +2,7 @@ class Game
   attr_reader :player, :answer, :message
 
   def initialize(player, answer)
-    @player = player
-    player.current_game = self
-
+    @player = player    
     @answer = answer
   end
 
@@ -15,37 +13,13 @@ class Game
   end
 
   def check_guess(guess)
-    case @answer.guess!(guess)
-    when :correct
-      @message = "correct!"
-    when :incorrect
-      @player.lose_life!
-      # send letter to trash
-      # @trash << guess
-      # draw hangman
+    result = @answer.guess!(guess)
 
-      if @player.dead?
-        @message = "Game over :("
-      else
-        @message = "wrong!"
-      end
+    action_for_guess(result)
+    set_message(result)
 
-    when :duplicate
-      @message = "Have we met before?"
-    when :invalid
-      @message = "Feeling special? You can only use a-z"
-    when :too_many_letters
-      @message = "Don't be greedy! One letter..."
-    end
-
-    check_complete_game
-  end
-
-  def check_complete_game
-    if @player.dead?
-      @answer.complete!
-    elsif @answer.completed?
-      @message = "You win!"
+    if completed?
+      finish_game
     end
   end
 
@@ -59,5 +33,43 @@ class Game
 
   def wrong_guesses
     @answer.wrong_guesses
+  end
+
+  private
+
+  def finish_game
+    if @answer.completed?
+      set_message(:complete)
+    else
+      @answer.complete!
+    end
+  end
+
+  def set_message(type)
+    case type
+    when :complete
+      @message = "You win!"
+    when :correct
+      @message = "correct!"
+    when :incorrect
+      if @player.dead?
+        @message = "Game over :("
+      else
+        @message = "wrong!"
+      end
+    when :duplicate
+      @message = "Have we met before?"
+    when :invalid
+      @message = "Feeling special? You can only use a-z"
+    when :too_many_letters
+      @message = "Don't be greedy! One letter..."
+    end
+  end
+
+  def action_for_guess(type)
+    case type
+    when :incorrect
+      @player.lose_life!
+    end
   end
 end

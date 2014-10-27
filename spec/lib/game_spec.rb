@@ -76,7 +76,7 @@ describe Game do
     end
   end
 
-  describe "#check_complete_game" do
+  describe "end game" do
     context "when player loses" do
       before do 
         @player = Player.new(1)
@@ -85,6 +85,7 @@ describe Game do
       end
 
       it "automatically completes Answer" do
+        expect(@answer).to receive(:completed?)
         expect(@answer).to receive(:complete!)
 
         @game.make_guess "t"
