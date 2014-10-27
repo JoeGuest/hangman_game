@@ -49,9 +49,8 @@ class Answer
     @word.split("")
   end
 
-
   def duplicate_guess?(guess)
-    @guesses.include? guess
+    @guesses.include?(guess) || @wrong_guesses.include?(guess)
   end
 
   def invalid_guess?(guess)

@@ -45,6 +45,15 @@ describe Answer do
 
         expect(answer.guess!(Guess.new("A"))).to eq :duplicate
       end
+
+      context "and when incorrect" do
+        it "doesn't add to wrong guesses" do
+          answer.guess!(Guess.new("t"))
+          answer.guess!(Guess.new("t"))
+
+          expect(answer.wrong_guesses.size).to eq 1
+        end
+      end
     end
   end
 
