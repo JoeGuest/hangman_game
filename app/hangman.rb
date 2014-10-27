@@ -3,19 +3,21 @@ require "sinatra/reloader"
 
 require "./features/support/scratchpad.rb"
 
+set :erb, escape_html: false
+
 helpers do
   def render_answer(answer)
-    current_answer = answer.inject("") do |str, guess|
+    current_answer = answer.inject([]) do |parts, guess|
       if guess == "_"
-        str << guess
+        parts << "<span class ='test'>#{guess}</span>"
       elsif guess.auto_generated?
-        str << "<span class='auto-generated'>#{guess.letter}</span>"
+        parts << "<span class='auto-generated'>#{guess.letter}</span>"
       else
-        str << guess.letter
+        parts << guess.letter
       end
     end
 
-    current_answer.split("").join(" ")
+    current_answer.join(" ")
   end
 end
 
