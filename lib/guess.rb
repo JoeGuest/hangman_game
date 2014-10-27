@@ -1,13 +1,13 @@
 class Guess
-  attr_reader :letter
+  attr_reader :string
 
-  def initialize(letter, type = nil)
-    @letter = letter
+  def initialize(string, type = nil)
+    @string = string
     @type = type
   end
 
   def to_s
-    letter
+    string
   end
 
   def ==(other)

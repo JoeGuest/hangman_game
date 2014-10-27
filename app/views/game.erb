@@ -15,7 +15,7 @@
       <div id="content-left">
         <div id="lives"><%= game.player.lives %></div>
         <div id="hangman"></div>
-        <div id="trash"><%= game.wrong_guesses.map(&:letter).join(" ") %></div>
+        <div id="trash"><%= game.wrong_guesses.map(&:string).join(" ") %></div>
       </div>
 
       <div id="content-right">

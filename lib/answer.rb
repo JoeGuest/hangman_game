@@ -14,11 +14,11 @@ class Answer
 
   def guess!(guess)
     result = :incorrect
-    word_length = guess.letter.length
+    word_length = guess.string.length
 
     if @guesses.include? guess
       result = :duplicate
-    elsif guess.letter.match /[^a-z]/i
+    elsif guess.string.match /[^a-z]/i
       result = :invalid
     elsif word_length > 1 && word_length != @word.length
       result = :too_many_letters
@@ -26,7 +26,7 @@ class Answer
       @guesses << guess
 
       if word_length == @word.length
-        if guess.letter == @word
+        if guess.string == @word
           letters.each_with_index do |letter, index|
             @current_answer[index] = Guess.new(letter)
           end
@@ -36,7 +36,7 @@ class Answer
       else
         # return true if correct, else false
         letters.each_with_index do |letter, index|
-          if guess.letter == letter
+          if guess.string == letter
             @current_answer[index] = guess
             result = :correct
           end
