@@ -24,7 +24,7 @@ class Game
   end
 
   def completed?
-    (@player.dead? || @answer.completed?) || false
+    @player.dead? || @answer.completed?
   end
 
   def guesses
