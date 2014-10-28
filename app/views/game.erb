@@ -13,9 +13,9 @@
       </div>
 
       <div id="content-left">
-        <div id="lives"><%= game.player.lives %></div>
+        <div id="lives">lives: <%= game.player.lives %></div>
         <div id="hangman"></div>
-        <div id="trash"><%= game.wrong_guesses.map(&:string).join(" ") %></div>
+        <div id="trash">trash: <strike><%= game.wrong_guesses.map(&:string).join(" ") %></strike></div>
       </div>
 
       <div id="content-right">
@@ -25,6 +25,8 @@
             <input type="text" name="guess" id="guess" autofocus/>
             <input type="submit" value="Guess!" />
           <% end %>
+
+          <div id="score"><%= game.score %></div>
         </form> 
       </div>
     </div>

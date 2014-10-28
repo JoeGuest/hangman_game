@@ -63,13 +63,17 @@ img {
   position: absolute;
   bottom: 0;
   left: 0;
-  text-decoration: line-through;
   font-size: 25px;
 }
 
 #lives {
   font-size: 25px;
   color: red;
+}
+
+#score {
+  font-size: 100px;
+  color: green;
 }
 
 /* CONTENT RIGHT */

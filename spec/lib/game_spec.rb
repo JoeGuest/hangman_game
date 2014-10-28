@@ -151,7 +151,8 @@ describe Game do
     end
 
     it "calculates running total" do
-      @game.new_guess "h"  
+      @game.new_guess "h"
+      @game.new_guess "t"  
       @game.new_guess "l"
 
       expect(@game.score).to eq 50
@@ -185,7 +186,14 @@ describe Game do
       # finish game
       @game.new_guess "o"
 
-      expect(@game.score).to eq 70 + (9 * 25)
+      expect(@game.score).to eq 80 + (9 * 25)
     end
+  end
+
+  it "calculates streaks" do
+    @game.new_guess "h"
+    @game.new_guess "e"
+
+    expect(@game.score).to eq 55
   end
 end
