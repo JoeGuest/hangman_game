@@ -2,7 +2,7 @@ class Guess
   attr_reader :string
 
   def initialize(string, type = nil)
-    @string = string
+    @string = string.downcase
     @type = type
   end
 

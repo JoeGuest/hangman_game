@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe Guess do
+  it "downcases all letters" do
+    expect(Guess.new("T").string).to eq "t"
+  end
+
   describe "#to_s" do
     it "returns letter" do
       expect(Guess.new("t").to_s).to eq "t"

@@ -11,7 +11,15 @@ describe Answer do
   end
 
   it "allows you to define word" do
-    expect(Answer.new("Hello").word).to eq "Hello"
+    expect(Answer.new("hello").word).to eq "hello"
+  end
+
+  it "converts word to lower case" do
+    expect(Answer.new("HELLO").word).to eq "hello"
+  end
+
+  it "is case-insensitive" do
+    expect(answer.guess!(Guess.new("a"))).to eq :correct
   end
 
   describe "#guess!" do

@@ -10,6 +10,8 @@ class Answer
     @current_answer = all_blanks
     @guesses = []
     @wrong_guesses = []
+
+    @word.downcase!
   end
 
   def guess!(guess)
