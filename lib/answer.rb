@@ -41,6 +41,10 @@ class Answer
     end
   end
 
+  def occurrences_of_letter(guess)
+    letters.grep(guess.string).size
+  end
+
   private
 
   def generate_new_word

@@ -20,7 +20,11 @@ class Abacus
 
   def score
     if guess_is_letter?
-      base_score * 10
+      if occurrences_of_letter > 1
+        (base_score * 10 * occurrences_of_letter) / 2
+      else
+        base_score * 10
+      end
     elsif guess_is_word?
       base_score * 3
     end
@@ -35,6 +39,10 @@ class Abacus
     @guess.string.split("").inject(0) do |total, letter|
       total += letter_values[letter.to_sym]
     end
+  end
+
+  def occurrences_of_letter
+    @answer.occurrences_of_letter(@guess)
   end
 
   def correct_guess?

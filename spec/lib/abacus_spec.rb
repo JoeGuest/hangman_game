@@ -66,6 +66,15 @@ describe Abacus do
       guess = Guess.new("a")
       expect(Abacus.new(guess, answer).score).to eq 10
     end
+
+    context "for multiple occurrences of letter" do
+      it "halves base score of each letter" do
+        @answer = Answer.new("Avengerers")
+        @guess = Guess.new("e")
+
+        expect(Abacus.new(@guess, @answer).score).to eq 15
+      end
+    end
   end
 
   context "for correct word guesses" do
@@ -94,6 +103,6 @@ describe Abacus do
     end
   end
 
-  context "for streaks"
+  context "for streaks" 
 
 end
