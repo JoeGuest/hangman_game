@@ -1,7 +1,8 @@
 class Abacus
-  def initialize(guess, answer)
+  def initialize(guess, answer, type = nil)
     @guess = guess
     @answer = answer
+    @type = type
   end
 
   def base_score
@@ -21,12 +22,18 @@ class Abacus
   def score
     if guess_is_letter?
       if occurrences_of_letter > 1
-        (base_score * 10 * occurrences_of_letter) / 2
+        total = (base_score * 10 * occurrences_of_letter) / 2
       else
-        base_score * 10
+        total = base_score * 10
       end
+
+      if @type == :streak 
+        total += (base_score * 10) / 2
+      end
+
+      total
     elsif guess_is_word?
-      base_score * 3
+      base_score * 10 * 3
     end
   end
 

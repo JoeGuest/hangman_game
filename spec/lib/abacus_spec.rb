@@ -88,7 +88,7 @@ describe Abacus do
     end
 
     it "returns x 3 of total base score" do
-      expect(Abacus.new(@guess, @answer).score).to eq 12 * 3
+      expect(Abacus.new(@guess, @answer).score).to eq 360
     end
   end
 
@@ -103,6 +103,21 @@ describe Abacus do
     end
   end
 
-  context "for streaks" 
+  context "for streaks" do
+    before do
+      @answer = Answer.new("Avengers")
+    end
 
+    it "adds 50% bonus points" do
+      @guess = Guess.new("a")
+
+      expect(Abacus.new(@guess, @answer, :streak).score).to eq 15
+    end
+
+    it "doesn't add bonus points for streak that involves word" do
+      @guess = Guess.new("Avengers")
+
+      expect(Abacus.new(@guess, @answer, :streak).score).to eq 360
+    end
+  end
 end
