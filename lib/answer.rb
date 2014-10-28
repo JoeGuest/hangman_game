@@ -45,6 +45,14 @@ class Answer
     letters.grep(guess.string).size
   end
 
+  def letters
+    @word.split("")
+  end
+
+  def letters_from_guesses
+    @guesses.select { |guess| guess.string.length == 1 }.map(&:string)
+  end
+
   private
 
   def generate_new_word
@@ -57,10 +65,6 @@ class Answer
 
   def letters_guessed_by_player
     @guesses.map(&:letter)
-  end
-
-  def letters
-    @word.split("")
   end
 
   def duplicate_guess?(guess)

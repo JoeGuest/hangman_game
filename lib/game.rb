@@ -1,9 +1,11 @@
 class Game
-  attr_reader :player, :answer, :message
+  attr_reader :player, :answer, :message, :current_score
 
   def initialize(player, answer)
     @player = player    
     @answer = answer
+
+    @current_score = 0
   end
 
   def new_guess(guess)
@@ -15,7 +17,7 @@ class Game
   def handle_guess(guess)
     result = @answer.guess!(guess)
 
-    action_for_guess(result)
+    action_for_guess(result, guess)
     set_message(result)
 
     if completed?
@@ -33,6 +35,18 @@ class Game
 
   def wrong_guesses
     @answer.wrong_guesses
+  end
+
+  def score
+    if completed?
+      @current_score + completed_game_bonus
+    else
+      @current_score
+    end
+  end
+
+  def completed_game_bonus
+    @player.lives * 25
   end
 
   private
@@ -66,8 +80,10 @@ class Game
     end
   end
 
-  def action_for_guess(type)
+  def action_for_guess(type, guess)
     case type
+    when :correct
+      @current_score += Abacus.new(guess, @answer).score
     when :incorrect
       @player.lose_life!
     end

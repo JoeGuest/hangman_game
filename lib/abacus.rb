@@ -43,9 +43,13 @@ class Abacus
   end
 
   def base_score_for_word
-    @guess.string.split("").inject(0) do |total, letter|
+    remaining_letters.inject(0) do |total, letter|
       total += letter_values[letter.to_sym]
     end
+  end
+
+  def remaining_letters
+    @guess.string.split("") - @answer.letters_from_guesses
   end
 
   def occurrences_of_letter

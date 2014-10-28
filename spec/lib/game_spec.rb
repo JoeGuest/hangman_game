@@ -143,4 +143,49 @@ describe Game do
     end
   end
 
+  describe "scoring" do
+    it "updates total" do
+      @game.new_guess "h"
+
+      expect(@game.score).to eq 40
+    end
+
+    it "calculates running total" do
+      @game.new_guess "h"  
+      @game.new_guess "l"
+
+      expect(@game.score).to eq 50
+    end
+
+    it "calculates running total on full word" do
+      @game.new_guess "b"
+      @game.new_guess "i"
+
+      @game.new_guess "h"
+
+      @game.new_guess "hello"
+
+      # the two l's above == 10 + 10 instead of 5 + 5
+      # todo: write test to demonstrate
+
+      expect(@game.score).to eq 160 + (8 * 25)
+    end
+
+    it "adds bonus for game complete" do
+      @game.new_guess "h"
+      @game.new_guess "e"
+
+      # duplicate doesn't count twice  
+      @game.new_guess "l"
+      @game.new_guess "l"
+      
+      # lose life
+      @game.new_guess "t"
+
+      # finish game
+      @game.new_guess "o"
+
+      expect(@game.score).to eq 70 + (9 * 25)
+    end
+  end
 end
