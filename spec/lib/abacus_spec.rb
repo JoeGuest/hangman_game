@@ -8,57 +8,63 @@ describe Abacus do
   let(:answer) { Answer.new(("a".."z").to_a.join) }
 
   %w(a e i o u n r s t l).each do |letter|
+    it "returns 1 for #{letter}" do
+      guess = Guess.new(letter)
+      expect(Abacus.new(guess, answer).base_score).to eq 1
+    end
+  end
+
+
+  %w(g d).each do |letter|
+    it "returns 2 for #{letter}" do
+      guess = Guess.new(letter)
+      expect(Abacus.new(guess, answer).base_score).to eq 2
+    end
+  end
+
+
+  %w(b c m p).each do |letter|
+    it "returns 3 for #{letter}" do
+      guess = Guess.new(letter)
+      expect(Abacus.new(guess, answer).base_score).to eq 3
+    end
+  end
+
+
+  %w(y f v w).each do |letter|
+    it "returns 4 for #{letter}" do
+      guess = Guess.new(letter)
+      expect(Abacus.new(guess, answer).base_score).to eq 4
+    end
+  end
+
+
+  %w(k).each do |letter|
+    it "returns 5 for #{letter}" do
+      guess = Guess.new(letter)
+      expect(Abacus.new(guess, answer).base_score).to eq 5
+    end
+  end
+
+
+  %w(j x).each do |letter|
+    it "returns 8 for #{letter}" do
+      guess = Guess.new(letter)
+      expect(Abacus.new(guess, answer).base_score).to eq 8
+    end
+  end
+
+  %w(q z).each do |letter|
     it "returns 10 for #{letter}" do
       guess = Guess.new(letter)
       expect(Abacus.new(guess, answer).base_score).to eq 10
     end
   end
 
-
-  %w(g d).each do |letter|
-    it "returns 20 for #{letter}" do
-      guess = Guess.new(letter)
-      expect(Abacus.new(guess, answer).base_score).to eq 20
-    end
-  end
-
-
-  %w(b c m p).each do |letter|
-    it "returns 30 for #{letter}" do
-      guess = Guess.new(letter)
-      expect(Abacus.new(guess, answer).base_score).to eq 30
-    end
-  end
-
-
-  %w(y f v w).each do |letter|
-    it "returns 40 for #{letter}" do
-      guess = Guess.new(letter)
-      expect(Abacus.new(guess, answer).base_score).to eq 40
-    end
-  end
-
-
-  %w(k).each do |letter|
-    it "returns 50 for #{letter}" do
-      guess = Guess.new(letter)
-      expect(Abacus.new(guess, answer).base_score).to eq 50
-    end
-  end
-
-
-  %w(j x).each do |letter|
-    it "returns 80 for #{letter}" do
-      guess = Guess.new(letter)
-      expect(Abacus.new(guess, answer).base_score).to eq 80
-    end
-  end
-
-
-  %w(q z).each do |letter|
-    it "returns 100 for #{letter}" do
-      guess = Guess.new(letter)
-      expect(Abacus.new(guess, answer).base_score).to eq 100
+  context "for correct letter guesses" do
+    it "returns x 10 of total base score" do
+      guess = Guess.new("a")
+      expect(Abacus.new(guess, answer).score).to eq 10
     end
   end
 
@@ -69,10 +75,12 @@ describe Abacus do
     end
 
     it "returns total base score for each correct letter" do
-      expect(Abacus.new(@guess, @answer).base_score).to eq 120
+      expect(Abacus.new(@guess, @answer).base_score).to eq 12
     end
 
-    it "returns x 3 of total base score"
+    it "returns x 3 of total base score" do
+      expect(Abacus.new(@guess, @answer).score).to eq 12 * 3
+    end
   end
 
   context "for incorrect guesses" do

@@ -14,13 +14,24 @@ class Abacus
     end
   end
 
+  def score
+    if correct_guess?
+      if guess_is_letter?
+        base_score * 10
+      elsif guess_is_word?
+        base_score * 3
+      end
+    end
+  end
+
   def base_score_for_letter
-    letter_values[@guess.string.to_sym] * 10  
+    # todo: reduce duplication
+    letter_values[@guess.string.to_sym]
   end
 
   def base_score_for_word
     @guess.string.split("").inject(0) do |total, letter|
-      total += letter_values[letter.to_sym] * 10  
+      total += letter_values[letter.to_sym]
     end
   end
 
