@@ -33,6 +33,14 @@ class Answer
     word == current_answer.join
   end
 
+  def correct_guess?(guess)
+    if guess.string.length == 1
+      letters.include? guess.string
+    else
+      @word == guess.string
+    end
+  end
+
   private
 
   def generate_new_word
@@ -62,14 +70,6 @@ class Answer
   def too_many_letters?(guess)
     word_length = guess.string.length
     word_length > 1 && word_length != @word.length
-  end
-
-  def correct_guess?(guess)
-    if guess.string.length == 1
-      letters.include? guess.string
-    else
-      @word == guess.string
-    end
   end
 
   def result_for_guess(guess)

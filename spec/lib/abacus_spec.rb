@@ -5,7 +5,7 @@ describe Abacus do
   # how many points letter is worth
   # how many occurrences of letter in word (half per occurrence)
 
-  let(:answer) { Answer.new("Avengers") }
+  let(:answer) { Answer.new(("a".."z").to_a.join) }
 
   %w(a e i o u n r s t l).each do |letter|
     it "returns 10 for #{letter}" do
@@ -62,7 +62,23 @@ describe Abacus do
     end
   end
 
-  context "for correct guesses"
+  context "for correct word guesses" do
+    before do 
+      @answer = Answer.new("Avengers")
+      @guess = Guess.new("Avengers")
+    end
+
+    it "returns total base score for each correct letter" do
+      expect(Abacus.new(@guess, @answer).base_score).to eq 120
+    end
+
+    it "returns x 3 of total base score"
+  end
+
+  context "for incorrect guesses" do
+    # nothing
+  end
+
   context "for streaks"
 
 end

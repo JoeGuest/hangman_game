@@ -10,6 +10,14 @@ class Guess
     string
   end
 
+  def letter?
+    string.length == 1
+  end
+
+  def word?
+    string.length > 1
+  end
+
   def ==(other)
     to_s == other.to_s
   end
