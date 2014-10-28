@@ -5,22 +5,24 @@ class Abacus
   end
 
   def base_score
+    total = 0
+
     if correct_guess?
       if guess_is_letter?
-        base_score_for_letter
+        total += base_score_for_letter
       elsif guess_is_word?
-        base_score_for_word
+        total += base_score_for_word
       end
     end
+
+    total
   end
 
   def score
-    if correct_guess?
-      if guess_is_letter?
-        base_score * 10
-      elsif guess_is_word?
-        base_score * 3
-      end
+    if guess_is_letter?
+      base_score * 10
+    elsif guess_is_word?
+      base_score * 3
     end
   end
 

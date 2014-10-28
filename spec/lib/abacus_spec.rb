@@ -84,7 +84,14 @@ describe Abacus do
   end
 
   context "for incorrect guesses" do
-    # nothing
+    before do
+      @answer = Answer.new("Avengers")
+      @guess = Guess.new("b")
+    end
+
+    it "returns no points" do
+      expect(Abacus.new(@guess, @answer).score).to eq 0
+    end
   end
 
   context "for streaks"
