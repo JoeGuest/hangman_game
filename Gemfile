@@ -3,6 +3,7 @@ source "https://rubygems.org"
 # web
 gem "sinatra"
 gem "sinatra-reloader"
+gem "thin"
 
 # tests
 gem "rspec"

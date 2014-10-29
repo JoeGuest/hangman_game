@@ -60,7 +60,12 @@ class Answer
     mechanize = Mechanize.new
     page = mechanize.get("http://www.merriam-webster.com/dictionary/#{@word}")
 
-    page.at(".ld_on_collegiate .bottom_entry").text.strip[2..-1]
+    p @word
+    p page.code
+
+    if page.code == "200"
+      page.at(".ld_on_collegiate p:first").text.strip.sub(": ", "")
+    end
   end
 
   def show_definition!
@@ -74,7 +79,7 @@ class Answer
   private
 
   def generate_new_word
-    File.readlines("./words/words.txt").sample.strip
+    File.readlines("./words/words2.txt").sample.strip
   end
 
   def all_blanks

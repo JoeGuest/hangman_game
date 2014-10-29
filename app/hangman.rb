@@ -3,6 +3,7 @@ require "sinatra/reloader"
 
 require "./lib/hangman"
 
+set :server, 'thin'
 set :erb, escape_html: false
 
 helpers do
