@@ -13,6 +13,8 @@ Then(/^new game is generated$/) do
 end
 
 Given(/^an existing game$/) do
+  reset_test_game
+  
   visit "/hangman"
   new_guess "A"
 end
@@ -116,7 +118,7 @@ When(/^player loses last life$/) do
 
   visit "/hangman"
 
-  letters = ("a".."z").to_a - %w(A v e n g e r s)
+  letters = ("a".."z").to_a - %w(a v e n g e r s)
 
   letters.first(10).each do |letter|
     new_guess letter
@@ -128,7 +130,7 @@ Then(/^notify player that they are dead$/) do
 end
 
 Then(/^show answer$/) do
-  expect_answer_to_be "A v e n g e r s"
+  expect_answer_to_be "A V E N G E R S"
 end
 
 Given(/^a finished game$/) do
@@ -136,7 +138,7 @@ Given(/^a finished game$/) do
 
   visit "/hangman"
 
-  letters = ("a".."z").to_a - %w(A v e n g e r s)
+  letters = ("a".."z").to_a - %w(a v e n g e r s)
 
   letters.first(10).each do |letter|
     new_guess letter
