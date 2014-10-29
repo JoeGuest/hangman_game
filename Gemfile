@@ -9,3 +9,6 @@ gem "rspec"
 gem "capybara"
 gem "cucumber"
 gem "poltergeist"
+
+# scraping
+gem "mechanize"

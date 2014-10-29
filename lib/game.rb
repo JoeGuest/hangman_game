@@ -24,12 +24,16 @@ class Game
     powerup.use!
   end
 
+  def definition
+    @answer.definition
+  end
+
   def show_definition!
-    # @answer.show_definition!
+    @answer.show_definition!
   end
 
   def show_definition?
-    # @answer.show_definition?
+    @answer.show_definition?
   end
 
   def take_from_bonus(cost)

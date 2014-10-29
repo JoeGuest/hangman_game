@@ -9,8 +9,8 @@
     <div id="content">
       <div id="content-top">
         <div id="answer"><%= render_answer(game.answer.current_answer) %></div>
-        <% if game.definition? %>
-          
+        <% if game.show_definition? %>
+          <div id="definition"><%= game.definition %></div>          
         <% end %>
         <a href="/hangman/new" id="new-game">new game</a>
       </div>

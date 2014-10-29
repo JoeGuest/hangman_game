@@ -11,9 +11,9 @@ helpers do
       if guess == "_"
         parts << "<span class ='test'>#{guess}</span>"
       elsif guess.auto_generated?
-        parts << "<span class='auto-generated'>#{guess.string}</span>"
+        parts << "<span class='auto-generated'>#{guess.string.capitalize}</span>"
       else
-        parts << guess.string
+        parts << guess.string.capitalize
       end
     end
 

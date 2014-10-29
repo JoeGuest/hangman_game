@@ -1,8 +1,11 @@
+require "mechanize"
+
 class Answer
   attr_reader :word,
               :current_answer,
               :guesses,
-              :wrong_guesses
+              :wrong_guesses,
+              :definition
 
   def initialize(word = nil)
     # generate answer from dictionary
@@ -51,6 +54,21 @@ class Answer
 
   def letters_from_guesses
     @guesses.select { |guess| guess.string.length == 1 }.map(&:string)
+  end
+
+  def find_definition
+    mechanize = Mechanize.new
+    page = mechanize.get("http://www.merriam-webster.com/dictionary/#{@word}")
+
+    page.at(".ld_on_collegiate .bottom_entry").text.strip[2..-1]
+  end
+
+  def show_definition!
+    @definition = find_definition
+  end
+
+  def show_definition?
+    !@definition.nil?
   end
 
   private
