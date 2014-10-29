@@ -48,6 +48,10 @@ end
 post "/hangman" do
   guess = params[:guess]
 
+  if params[:powerup]
+    settings.game.use_powerup(params[:powerup])
+  end
+
   settings.game.new_guess(guess)
 
   erb :game, locals: { game: settings.game }

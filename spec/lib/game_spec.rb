@@ -147,7 +147,7 @@ describe Game do
     it "updates total" do
       @game.new_guess "h"
 
-      expect(@game.score).to eq 40
+      expect(@game.score).to eq 80
     end
 
     it "calculates running total" do
@@ -155,7 +155,7 @@ describe Game do
       @game.new_guess "t"  
       @game.new_guess "l"
 
-      expect(@game.score).to eq 50
+      expect(@game.score).to eq 100
     end
 
     it "calculates running total on full word" do
@@ -169,7 +169,7 @@ describe Game do
       # the two l's above == 10 + 10 instead of 5 + 5
       # todo: write test to demonstrate
 
-      expect(@game.score).to eq 160 + (8 * 25)
+      expect(@game.score).to eq 720
     end
 
     it "adds bonus for game complete" do
@@ -186,7 +186,7 @@ describe Game do
       # finish game
       @game.new_guess "o"
 
-      expect(@game.score).to eq 80 + (9 * 25)
+      expect(@game.score).to eq 610
     end
   end
 
@@ -194,6 +194,6 @@ describe Game do
     @game.new_guess "h"
     @game.new_guess "e"
 
-    expect(@game.score).to eq 55
+    expect(@game.score).to eq 110
   end
 end

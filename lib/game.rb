@@ -6,6 +6,7 @@ class Game
     @answer = answer
 
     @current_score = 0
+    @current_bonus = 1
     @results = []
   end
 
@@ -15,17 +16,24 @@ class Game
     this_guess
   end
 
-  def handle_guess(guess)
-    result = @answer.guess!(guess)
+  def use_powerup!(powerup_name)
+    # todo: take percentage off total score at end of game
+    # not current score
 
-    action_for_guess(result, guess)
-    set_message(result)
+    powerup = Powerup.new(powerup_name, self)
+    powerup.use!
+  end
 
-    if completed?
-      finish_game
-    end
+  def show_definition!
+    # @answer.show_definition!
+  end
 
-    @results << result
+  def show_definition?
+    # @answer.show_definition?
+  end
+
+  def take_from_bonus(cost)
+    @current_bonus -= cost
   end
 
   def completed?
@@ -42,9 +50,10 @@ class Game
 
   def score
     if completed?
-      @current_score + completed_game_bonus
+      @current_score += completed_game_bonus
+      @current_score = (@current_score * (1 + @current_bonus)).round
     else
-      @current_score
+      (@current_score * (1 + @current_bonus)).round
     end
   end
 
@@ -52,7 +61,24 @@ class Game
     @player.lives * 25
   end
 
+  def definition?
+    false
+  end
+
   private
+
+  def handle_guess(guess)
+    result = @answer.guess!(guess)
+
+    action_for_guess(result, guess)
+    set_message(result)
+
+    if completed?
+      finish_game
+    end
+
+    @results << result
+  end
 
   def finish_game
     if @answer.completed?
