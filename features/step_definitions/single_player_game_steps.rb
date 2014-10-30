@@ -4,6 +4,7 @@ end
 
 When(/^player starts a new game$/) do
   visit "/hangman"  
+  page.evaluate_script.
 end
 
 Then(/^new game is generated$/) do
