@@ -16,3 +16,7 @@ end
 
 reset_test_game
 Capybara.app = Sinatra::Application
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end

@@ -10,6 +10,7 @@ describe ShowDefinitionPowerup do
   end
 
   it "costs 25% of final score to use" do
+    answer.stub(find_definition: "Testing Avengers")
     game.use_powerup!(:show_definition)
     game.new_guess "batman"
 

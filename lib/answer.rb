@@ -60,9 +60,6 @@ class Answer
     mechanize = Mechanize.new
     page = mechanize.get("http://www.merriam-webster.com/dictionary/#{@word}")
 
-    p @word
-    p page.code
-
     if page.code == "200"
       page.at(".ld_on_collegiate p:first").text.strip.sub(": ", "")
     end

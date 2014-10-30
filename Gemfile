@@ -9,7 +9,9 @@ gem "thin"
 gem "rspec"
 gem "capybara"
 gem "cucumber"
-gem "poltergeist"
+# gem "poltergeist"
+gem "chromedriver-helper"
+gem "selenium-webdriver"
 
 # scraping
 gem "mechanize"
