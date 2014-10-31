@@ -89,34 +89,27 @@ post "/api/" do
     @text = "started game with word #{answer.word}\n"
     @text += render_answer_for_api(settings.game.answer.current_answer)
   elsif result.guess
+    settings.game.new_guess(result.guess)
+    
+    @text =  "<< #{settings.game.message} >>\n\n"
+    
     if settings.game.completed?
-      @text = "<< Game is finished >>\n\n"
+      @text += "type ';start' to start a new game"
+    end
 
-      @text += render_answer_for_api(settings.game.answer.current_answer) + "\n"
+    @text += render_answer_for_api(settings.game.answer.current_answer) + "\n"
 
+    if settings.game.completed?
       begin
         @text += settings.game.answer.find_definition + "\n\n"
       rescue NoMethodError
       end
-
-      @text += "Type ';start' to start a new game"
-    else
-      settings.game.new_guess(result.guess)
-      @text =  "<< #{settings.game.message} >>\n\n"
-      @text += render_answer_for_api(settings.game.answer.current_answer) + "\n"
-
-      if settings.game.completed?
-        begin
-          @text += settings.game.answer.find_definition + "\n\n"
-        rescue NoMethodError
-        end
-      end
-
-      @text += "Trash: #{settings.game.wrong_guesses.map(&:string).join(', ')}\n\n"
-
-      @text += "Lives: #{settings.game.player.lives}\n"
-      @text += "Score: #{settings.game.score}\n"
     end
+
+    @text += "Trash: #{settings.game.wrong_guesses.map(&:string).join(', ')}\n\n"
+
+    @text += "Lives: #{settings.game.player.lives}\n"
+    @text += "Score: #{settings.game.score}\n"
   end
 
   content_type :json

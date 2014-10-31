@@ -11,9 +11,13 @@ class Game
   end
 
   def new_guess(guess)
-    this_guess = Guess.new(guess)
-    handle_guess(this_guess)
-    this_guess
+    if completed?
+      @message = "Game is finished"
+    else
+      this_guess = Guess.new(guess)
+      handle_guess(this_guess)
+      this_guess
+    end
   end
 
   def use_powerup!(powerup_name)
@@ -54,8 +58,7 @@ class Game
 
   def score
     if completed?
-      @current_score += completed_game_bonus
-      @current_score = (@current_score * (1 + @current_bonus)).round
+      completed_game_bonus + (@current_score * (1 + @current_bonus)).round
     else
       (@current_score * (1 + @current_bonus)).round
     end
