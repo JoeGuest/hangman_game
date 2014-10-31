@@ -86,8 +86,8 @@ post "/api/" do
     answer = Answer.new
     game = Game.new(player, answer)
     Sinatra::Application.set :game, game 
-    @text = "started game with word #{answer.word}\n"
-    @text += render_answer_for_api(settings.game.answer.current_answer)
+    # @text = "started game with word #{answer.word}\n"
+    @text = render_answer_for_api(settings.game.answer.current_answer)
   elsif result.guess
     settings.game.new_guess(result.guess)
     
