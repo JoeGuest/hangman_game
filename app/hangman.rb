@@ -99,7 +99,7 @@ post "/api/" do
       rescue NoMethodError
       end
 
-      @text += "Type '#start' to start a new game"
+      @text += "Type ';start' to start a new game"
     else
       settings.game.new_guess(result.guess)
       @text =  "<< #{settings.game.message} >>\n\n"
