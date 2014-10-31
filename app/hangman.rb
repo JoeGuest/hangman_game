@@ -13,9 +13,21 @@ helpers do
       if guess == "_"
         parts << "<span class ='test'>#{guess}</span>"
       elsif guess.auto_generated?
-        parts << "<span class='auto-generated'>#{guess.string.capitalize}</span>"
+        parts << "<span class='auto-generated'>#{guess.string.upcase}</span>"
       else
-        parts << guess.string.capitalize
+        parts << guess.string.upcase
+      end
+    end
+
+    current_answer.join(" ")
+  end
+
+  def render_answer_for_api(answer)
+    current_answer = answer.inject([]) do |parts, guess|
+      if guess == "_"
+        parts << "__"
+      else
+        parts << guess.string.upcase
       end
     end
 
@@ -74,14 +86,16 @@ post "/api/" do
     answer = Answer.new
     game = Game.new(player, answer)
     Sinatra::Application.set :game, game 
-    @text = "started game with word #{answer.word}"
+    @text = "started game with word #{answer.word}\n"
+    @text += render_answer_for_api(settings.game.answer.current_answer)
   elsif result.guess
     settings.game.new_guess(result.guess)
-    @text =  "message: #{settings.game.message}\n"
-    @text += "current answer: #{settings.game.answer.current_answer.join('')}\n"
-    @text += "score: #{settings.game.score}\n"
+    @text =  "<< #{settings.game.message} >>\n\n"
+    @text += render_answer_for_api(settings.game.answer.current_answer) + "\n"
+    @text += "trash: #{settings.game.wrong_guesses.map(&:string).join(', ')}\n\n"
+
     @text += "lives: #{settings.game.player.lives}\n"
-    @text += "trash: #{settings.game.wrong_guesses.map(&:string).join(', ')}"
+    @text += "score: #{settings.game.score}\n"
   end
 
   content_type :json
