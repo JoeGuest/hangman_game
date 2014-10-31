@@ -3,8 +3,9 @@ source "https://rubygems.org"
 # web
 gem "sinatra"
 gem "sinatra-reloader"
-gem "thin"
+# gem "thin"
 gem "json"
+gem "shotgun"
 
 # tests
 gem "rspec"

@@ -77,7 +77,9 @@ post "/api/" do
     @text = "started game with word #{answer.word}"
   elsif result.guess
     settings.game.new_guess(result.guess)
-    @text = "made guess #{result.guess}, current answer: #{settings.game.answer.current_answer.join('')}"
+    @text = "made guess #{result.guess}\n"
+    @text += "current answer: #{settings.game.answer.current_answer.join('')}\n"
+    @text += "score: #{settings.game.score}"
   end
 
   content_type :json
