@@ -10,7 +10,7 @@ class SlackResult
   end
 
   def command
-    command? ? text.sub("#", "") : false
+    command? ? text.sub(";", "") : false
   end
 
   def guess
@@ -20,7 +20,7 @@ class SlackResult
   private
 
   def command?
-    text.include? "#"
+    text.include? ";"
   end
 
   def raise_error_if_not_valid
