@@ -37,6 +37,6 @@ class SlackResult
   end
 
   def method_missing(name, *args, &block)
-    @payload.fetch(name.to_s, false)
+    @payload.fetch(name.to_s, false) || @payload.fetch(name.to_sym, false)
   end
 end
