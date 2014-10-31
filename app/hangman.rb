@@ -77,9 +77,11 @@ post "/api/" do
     @text = "started game with word #{answer.word}"
   elsif result.guess
     settings.game.new_guess(result.guess)
-    @text = "made guess #{result.guess}\n"
+    @text =  "message: #{settings.game.message}\n"
     @text += "current answer: #{settings.game.answer.current_answer.join('')}\n"
-    @text += "score: #{settings.game.score}"
+    @text += "score: #{settings.game.score}\n"
+    @text += "lives: #{settings.game.player.lives}\n"
+    @text += "trash: #{settings.game.wrong_guesses.map(&:string).join(', ')}"
   end
 
   content_type :json
