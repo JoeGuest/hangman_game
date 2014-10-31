@@ -100,10 +100,7 @@ post "/api/" do
     @text += render_answer_for_api(settings.game.answer.current_answer) + "\n"
 
     if settings.game.completed?
-      begin
-        @text += settings.game.answer.find_definition + "\n\n"
-      rescue NoMethodError
-      end
+      @text += settings.game.answer.find_definition + "\n\n"
     end
 
     @text += "Trash: #{settings.game.wrong_guesses.map(&:string).join(', ')}\n\n"

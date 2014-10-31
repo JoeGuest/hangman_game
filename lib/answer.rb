@@ -57,12 +57,16 @@ class Answer
   end
 
   def find_definition
-    mechanize = Mechanize.new
-    page = mechanize.get("http://www.merriam-webster.com/dictionary/#{@word}")
+  mechanize = Mechanize.new
+  page = mechanize.get("http://www.merriam-webster.com/dictionary/#{@word}")
 
-    if page.code == "200"
-      page.at(".ld_on_collegiate p:first").text.strip.sub(": ", "")
-    end
+
+  if page.code == "200"
+    page.at(".ld_on_collegiate p:first").text.strip.sub(": ", "")
+  end
+  
+  rescue # OH NO!
+    "no definition found"
   end
 
   def show_definition!
