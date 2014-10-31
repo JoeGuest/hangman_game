@@ -29,6 +29,7 @@ GEM
       multi_json (~> 1.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    json (1.8.1)
     mechanize (2.7.3)
       domain_name (~> 0.5, >= 0.5.1)
       http-cookie (~> 1.0)
@@ -103,6 +104,7 @@ DEPENDENCIES
   capybara
   chromedriver-helper
   cucumber
+  json
   mechanize
   rspec
   selenium-webdriver

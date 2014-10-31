@@ -6,3 +6,5 @@ require_relative "abacus"
 
 require_relative "powerup"
 require_relative "show_definition_powerup"
+
+require_relative "slack_result"
