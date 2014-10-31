@@ -14,6 +14,6 @@ describe ShowDefinitionPowerup do
     game.use_powerup!(:show_definition)
     game.new_guess "batman"
 
-    expect(game.score).to eq 963
+    expect(game.score).to eq 775
   end
 end

@@ -85,7 +85,7 @@ describe Game do
       end
 
       it "automatically completes Answer" do
-        expect(@answer).to receive(:completed?)
+        expect(@answer).to receive(:completed?).at_least(1).times
         expect(@answer).to receive(:autocomplete!)
 
         @game.new_guess "t"
@@ -169,7 +169,7 @@ describe Game do
       # the two l's above == 10 + 10 instead of 5 + 5
       # todo: write test to demonstrate
 
-      expect(@game.score).to eq 720
+      expect(@game.score).to eq 520
     end
 
     it "adds bonus for game complete" do
@@ -186,7 +186,7 @@ describe Game do
       # finish game
       @game.new_guess "o"
 
-      expect(@game.score).to eq 610
+      expect(@game.score).to eq 385
     end
   end
 
